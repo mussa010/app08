@@ -1,3 +1,3 @@
 # app08
 
-A new Flutter project.
+Implementação de aplicativo com firebase
