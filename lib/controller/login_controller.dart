@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,15 @@ class LoginController {
       password: senha
     ).then((resultado) {
       //Usuário criado com sucesso
+
+      //Armazenar o NOME e o ID do usuário no Firestore
+      FirebaseFirestore.instance.collection('usuarios').add(
+        {
+          "uid": resultado.user!.uid,
+          "nome": nome
+        }
+      );
+
       sucesso(context, 'Usuario criado com sucesso!');
       Navigator.pop(context);
     }).catchError((e) {
