@@ -21,6 +21,16 @@ class _PrincipalViewState extends State<PrincipalView> {
     return Scaffold(
       appBar: AppBar(
         title:Text('Tarefas'),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(onPressed: () {
+            LoginController().logout();
+            Navigator.pop(context);
+          }, 
+          icon: Icon(Icons.exit_to_app),
+            tooltip: 'Sair',
+          ),
+        ],
         ),
 
 
