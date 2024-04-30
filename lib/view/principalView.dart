@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:app08/controller/tarefa_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/login_controller.dart';
+import '../model/tarefa.dart';
 
 class PrincipalView extends StatefulWidget {
   const PrincipalView({super.key});
@@ -96,7 +98,16 @@ class _PrincipalViewState extends State<PrincipalView> {
             ElevatedButton(
               child: Text("salvar"),
               onPressed: () {
-                
+                // criar objeto tarefa
+                var t = Tarefa(
+                  LoginController().idUsuarioLogado(),
+                  txtTitulo.text,
+                  txtDescricao.text
+                );
+                txtTitulo.clear();
+                txtDescricao.clear();
+
+                TarefaController().adicionar(context, t);
               },
             ),
           ],
