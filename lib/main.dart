@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app08/firebase_options.dart';
 import 'package:app08/view/cadastrar_view.dart';
 import 'package:app08/view/login_view.dart';
@@ -18,7 +16,7 @@ void main() async {
 
   runApp(DevicePreview(
     enabled: true,
-    builder: (context) => MainApp(),
+    builder: (context) => const MainApp(),
   ));
 }
 
@@ -31,9 +29,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       routes: {
-        'login': (context) => LoginView(),
-        'cadastrar' : (context) => CadastrarView(),
-        'principal' : (context) => PrincipalView()
+        'login': (context) => const LoginView(),
+        'cadastrar' : (context) => const CadastrarView(),
+        'principal' : (context) => const PrincipalView()
       },
     );
   }
