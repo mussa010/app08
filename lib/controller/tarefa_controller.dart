@@ -32,6 +32,17 @@ class TarefaController {
     .doc(id)
     .delete()
     .then((value) => sucesso(context, 'Tarefa excluída com sucesso!'))
-    .catchError((e) => erro(context, 'Não foi possível excluir tarefa!'));
+    .catchError((e) => erro(context, 'Não foi possível excluir tarefa!'))
+    .whenComplete(() => Navigator.pop(context));
+  }
+
+  //Atualizar tarefa
+  atualizar(context, id, Tarefa t) {
+    FirebaseFirestore.instance.collection('tarefas')
+    .doc(id)
+    .update(t.toJson())
+    .then((value) => sucesso(context, 'Tarefa atualizada com sucesso'))
+    .catchError((e) => erro(context, 'Não foi possível atualizar a tarefa'))
+    .whenComplete(() => Navigator.pop(context));
   }
 }

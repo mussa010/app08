@@ -79,11 +79,22 @@ class _PrincipalViewState extends State<PrincipalView> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Expanded(
+                                  //
+                                  // ATUALIZAR
+                                  //
                                   child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      txtTitulo.text = doc['titulo'];
+                                      txtDescricao.text = doc['descricao'];
+                                      salvarTarefa(context, docId: id);
+                                    },
                                     icon: Icon(Icons.edit_outlined),
                                   ),
                                 ),
+
+                                //
+                                // EXCLUIR
+                                //
                                 IconButton(
                                   onPressed: () {
                                     TarefaController().excluir(context, id);
@@ -93,7 +104,6 @@ class _PrincipalViewState extends State<PrincipalView> {
                               ],
                             ),
                           ),
-                          
                         ),
                       );
                     },
@@ -126,7 +136,7 @@ class _PrincipalViewState extends State<PrincipalView> {
       builder: (BuildContext context) {
         // retorna um objeto do tipo Dialog
         return AlertDialog(
-          title: Text("Adicionar Tarefa"),
+          title: Text(docId == null ? "Adicionar Tarefa" : "Editar Tarefa"),
           content: SizedBox(
             height: 250,
             width: 300,
@@ -176,7 +186,11 @@ class _PrincipalViewState extends State<PrincipalView> {
                 txtTitulo.clear();
                 txtDescricao.clear();
 
-                TarefaController().adicionar(context, t);
+                if (docId == null) {
+                  TarefaController().adicionar(context, t);
+                } else {
+                  TarefaController().atualizar(context, docId, t);
+                }
               },
             ),
           ],

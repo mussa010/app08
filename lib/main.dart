@@ -14,12 +14,14 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => MainApp(),
-    ),
-  );
+  // runApp(
+  //   DevicePreview(
+  //     enabled: true,
+  //     builder: (context) => MainApp(),
+  //   ),
+  // );
+
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
