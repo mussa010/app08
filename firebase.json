@@ -1,1 +1,36 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"app-lista-tarefas-engcom-33524","appId":"1:434216583097:android:bef395858e67e39c78c068","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"app-lista-tarefas-engcom-33524","configurations":{"android":"1:434216583097:android:bef395858e67e39c78c068","web":"1:434216583097:web:51bb5a0a4848a2c178c068"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "app-lista-tarefas-engcom-33524",
+          "appId": "1:434216583097:android:bef395858e67e39c78c068",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "app-lista-tarefas-engcom-33524",
+          "configurations": {
+            "android": "1:434216583097:android:bef395858e67e39c78c068",
+            "web": "1:434216583097:web:51bb5a0a4848a2c178c068"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
