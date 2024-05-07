@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
-import 'package:app08/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 
+import '../controller/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -20,9 +20,8 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
 
-
-    txtEmail.text = 'math_200901@hotmail.com';
-    txtSenha.text = '1234567890';
+    txtEmail.text = 'joao.silva@email.com';
+    txtSenha.text = '123456';
   }
 
   @override
@@ -91,7 +90,13 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              LoginController().esqueceuSenha(context, txtEmailEsqueceuSenha.text);
+                              //
+                              // Enviar email recuperação de senha
+                              //
+                              LoginController().esqueceuSenha(
+                                context,
+                                txtEmailEsqueceuSenha.text,
+                              );
                               Navigator.pop(context);
                             },
                             child: Text('enviar'),
@@ -114,8 +119,8 @@ class _LoginViewState extends State<LoginView> {
                 // LOGIN
                 //
                 LoginController().login(
-                  context, 
-                  txtEmail.text, 
+                  context,
+                  txtEmail.text,
                   txtSenha.text,
                 );
               },

@@ -1,23 +1,25 @@
-import 'package:app08/firebase_options.dart';
-import 'package:app08/view/cadastrar_view.dart';
-import 'package:app08/view/login_view.dart';
-import 'package:app08/view/principalView.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'firebase_options.dart';
+import 'view/cadastrar_view.dart';
+import 'view/login_view.dart';
+import 'view/principal_view.dart';
 
-
-void main() async {
-
+Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(DevicePreview(
-    enabled: true,
-    builder: (context) => const MainApp(),
-  ));
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -29,9 +31,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       routes: {
-        'login': (context) => const LoginView(),
-        'cadastrar' : (context) => const CadastrarView(),
-        'principal' : (context) => const PrincipalView()
+        'login': (context) => LoginView(),
+        'cadastrar': (context) => CadastrarView(),
+        'principal': (context) => PrincipalView(),
       },
     );
   }

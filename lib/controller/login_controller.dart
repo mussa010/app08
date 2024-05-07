@@ -6,41 +6,42 @@ import '../view/util.dart';
 
 class LoginController {
   //
-  // CRIAR CONTA DE UM USUÁRIO NO SERVIÇO DO FIREBASE AUTHENTICATION
+  // CRIAR CONTA de um usuário no serviço Firebase Authentication
   //
   criarConta(context, nome, email, senha) {
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email, 
-      password: senha
-    ).then((resultado) {
-      //Usuário criado com sucesso
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: email,
+      password: senha,
+    )
+        .then(
+      (resultado) {
+        //Usuário criado com sucesso!
 
-      //Armazenar o NOME e o ID do usuário no Firestore
-      FirebaseFirestore.instance.collection('usuarios').add(
-        {
-          "uid": resultado.user!.uid,
-          "nome": nome
-        }
-      );
+        //Armazenar o NOME e UID do usuário no Firestore
+        FirebaseFirestore.instance.collection("usuarios").add(
+          {
+            "uid": resultado.user!.uid,
+            "nome": nome,
+          },
+        );
 
-      sucesso(context, 'Usuario criado com sucesso!');
-      Navigator.pop(context);
-    }).catchError((e) {
-      //Erro durante a criação do suário
-
-      switch(e.code) {
+        sucesso(context, 'Usuário criado com sucesso!');
+        Navigator.pop(context);
+      },
+    ).catchError((e) {
+      //Erro durante a criação do usuário
+      switch (e.code) {
         case 'email-already-in-use':
-          erro(context, 'O email já foi criado.');
+          erro(context, 'O email já foi cadastrado.');
           break;
         case 'invalid-email':
-          erro(context, 'Email inválido.');
+          erro(context, 'O formato do e-mail é inválido.');
           break;
         default:
-          erro(context, 'Erro: ${e.toString()}');
+          erro(context, 'ERRO: ${e.toString()}');
       }
     });
-
-
   }
 
   //
@@ -50,14 +51,16 @@ class LoginController {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
         .then((resultado) {
+          
       sucesso(context, 'Usuário autenticado com sucesso!');
       Navigator.pushNamed(context, 'principal');
+
     }).catchError((e) {
       switch (e.code) {
         case 'invalid-email':
           erro(context, 'O formato do e-mail é inválido.');
         case 'invalid-credential':
-          erro(context, 'Credenciais inválidas.');
+          erro(context, 'Usuário e/ou senha inválida.');
         default:
           erro(context, 'ERRO: ${e.code.toString()}');
       }
@@ -65,23 +68,25 @@ class LoginController {
   }
 
   esqueceuSenha(context, email) {
-    if(email.isNotEmpty) {
-      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      sucesso(context, 'Email enviado com sucesso');
+    if (email.isNotEmpty) {
+      FirebaseAuth.instance.sendPasswordResetEmail(
+        email: email,
+      );
+      sucesso(context, 'Email enviado com sucesso.');
     } else {
-      erro(context, 'Infore o email para recuperar a conta');
+      erro(context, 'Informe o email para recuperar a conta.');
     }
   }
 
   //
-  //Efetuar logout do usuário
+  // Efetuar logou do usuário
   //
   logout() {
     FirebaseAuth.instance.signOut();
   }
 
   //
-  //Retorna o UID (User Identifier) do usuário que está logado no App
+  // Retornar o UID (User Identifier) do usuário que está logado no App
   //
   idUsuarioLogado() {
     return FirebaseAuth.instance.currentUser!.uid;
